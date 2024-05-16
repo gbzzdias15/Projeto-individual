@@ -20,13 +20,6 @@ function autenticar(req, res) {
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
 
-                        // aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
-                        //     .then((resultadoAquarios) => {
-                        //         if (resultadoAquarios.length > 0) {
-                            //         } else {
-                                //             res.status(204).json({ aquarios: [] });
-                                //         }
-                                //     })
 
 
                                             res.json({
