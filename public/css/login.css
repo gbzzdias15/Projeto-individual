@@ -73,6 +73,13 @@ ul.navbar li:hover {
     cursor: pointer;
 }
 
+.imgVolta{
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
 .banner {
     display: flex;
     align-items: center;

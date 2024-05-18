@@ -1,165 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<head>
+  <head>
     <script src="./js/sessao.js"></script>
     <title>Cadastro My wife and kids</title>
-    <link rel="stylesheet" href="./css/login.css">
-</head>
+    <link rel="stylesheet" href="./css/login.css" />
+  </head>
 
-<body>
-
+  <body>
     <div class="header">
+      <div class="logo">
+        <a class="logo1" href="./index.html">
+          <img src="./assets/images-Photoroom.png-Photoroom.png" alt="" />
+        </a>
+      </div>
 
-        <div class="logo">
-            <a class="logo1" href="./home.html">
-                <img src="./assets/images-Photoroom.png-Photoroom.png" alt="">
-            </a>
-        </div>
+      <div class="imgVolta">
+        <a href="./index.html">
+          <img src="./assets/icons8-voltar-64.png" alt=""
+        /></a>
+      </div>
 
-        <ul class="navbar">
-
-
-            <div>
-
-                <a href=" ./home.html">
-                    <li><b>Home </b></li>
-                </a>
-
-            </div>
-
-            <div>
-
-                <a href=" ./tela_cadastro.html">
-                    <li><b>Cadastro </b></li>
-                </a>
-
-
-
-            </div>
-
-
-        </ul>
-
-        <!-- <div class="container">
+      <!-- <div class="container">
         </div>  -->
-
-
     </div>
 
     <div class="banner">
+      <div class="imgLog">
+        <img
+          src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/star/D29990374D2BB882D061015A3BF8C16C7DF2A08A2EEDD532D487FDA5C11E1106/scale?width=1200&aspectRatio=1.78&format=jpeg"
+          alt=""
+        />
+      </div>
+      <div class="container1">
+        <div class="cadastro">
+          <div class="input">
+            <h1>Bem-vindo !</h1>
 
-        <div class="imgLog">
-            <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/star/D29990374D2BB882D061015A3BF8C16C7DF2A08A2EEDD532D487FDA5C11E1106/scale?width=1200&aspectRatio=1.78&format=jpeg"
-                alt="">
+            <label
+              >E-mail :
+              <input type="text" placeholder="Seu E-mail aqui!" id="ipt_email"
+            /></label>
+            <br />
+            <label
+              >Senha :
+              <input type="password" placeholder="*******" id="ipt_senha"
+            /></label>
+            <br />
 
-        </div>
-        <div class="container1">
-            <div class="cadastro">
-                <div class="input">
-                    <h1>Bem-vindo !</h1>
-
-                    <label>E-mail : <input type="text" placeholder="Seu E-mail aqui!" id="ipt_email"></label> <br>
-                    <label>Senha : <input type="password" placeholder="*******" id="ipt_senha"></label> <br>
-
-                    <br>
-                    <button onclick="entrar()">Entrar</button> <br>
-                    <p>Ainda não tem conta ? <a class="cadastro" href="tela_cadastro.html">Cadastra-se!</a></p>
-                    <div id="msg"></div>
-                    <div id="div_aguardar" class="loading-div">
-                        <!-- <img src="./assets/circle-loading.gif" id="loading-gif" /> -->
-                      </div>
-                </div>
+            <br />
+            <button onclick="entrar()">Entrar</button> <br />
+            <p>
+              Ainda não tem conta ?
+              <a class="cadastro" href="tela_cadastro.html">Cadastra-se!</a>
+            </p>
+            <div id="msg"></div>
+            <div id="div_aguardar" class="loading-div">
+              <!-- <img src="./assets/circle-loading.gif" id="loading-gif" /> -->
             </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <div class="footer">
-
-        <p>Email : Gabrieldias@gmail.com</p>
-        <p>Telefone: (11) 99277-6245</p>
-        <p>My wife and kids</p>
-
+      <p>Email : Gabrieldias@gmail.com</p>
+      <p>Telefone: (11) 99277-6245</p>
+      <p>My wife and kids</p>
     </div>
-
-</body>
-
+  </body>
 </html>
 
 <script>
+  function entrar() {
+    aguardar();
 
+    var emailVar = ipt_email.value;
+    var senhaVar = ipt_senha.value;
 
-
-    function entrar() {
-        aguardar();
-
-        var emailVar = ipt_email.value;
-        var senhaVar = ipt_senha.value;
-
-        if (emailVar == "" || senhaVar == "") {
-            msg.style.display = "block"
-            msg.innerHTML = "Há campos em branco";
-            finalizarAguardar();
-            return false;
-        }
-        else {
-            setInterval(sumirMensagem, 5000)
-        }
-
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
-
-        fetch("/usuarios/autenticar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            })
-        }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
-
-            if (resposta.ok) {
-                console.log(resposta);
-
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
-
-
-                    setTimeout(function () {
-                        window.location = "homeLogado.html";
-                    }, 3000); // apenas para exibir o loading
-
-                });
-
-            } else {
-
-                console.log("Houve um erro ao tentar realizar o login!");
-
-                resposta.text().then(texto => {
-                    console.error(texto);
-                    finalizarAguardar(texto);
-                });
-            }
-
-        }).catch(function (erro) {
-            console.log(erro);
-        })
-
-        return false;
+    if (emailVar == "" || senhaVar == "") {
+      msg.style.display = "block";
+      msg.innerHTML = "Há campos em branco";
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
     }
 
-    function sumirMensagem() {
-        msg.style.display = "none"
-    }
+    console.log("FORM LOGIN: ", emailVar);
+    console.log("FORM SENHA: ", senhaVar);
 
+    fetch("/usuarios/autenticar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!");
+
+        if (resposta.ok) {
+          console.log(resposta);
+
+          resposta.json().then((json) => {
+            console.log(json);
+            console.log(JSON.stringify(json));
+            sessionStorage.EMAIL_USUARIO = json.email;
+            sessionStorage.NOME_USUARIO = json.nome;
+            sessionStorage.ID_USUARIO = json.id;
+
+            setTimeout(function () {
+              window.location = "homeLogado.html";
+            }, 3000); // apenas para exibir o loading
+          });
+        } else {
+          console.log("Houve um erro ao tentar realizar o login!");
+
+          resposta.text().then((texto) => {
+            console.error(texto);
+            finalizarAguardar(texto);
+          });
+        }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+      });
+
+    return false;
+  }
+
+  function sumirMensagem() {
+    msg.style.display = "none";
+  }
 </script>
