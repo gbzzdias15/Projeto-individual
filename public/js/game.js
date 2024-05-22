@@ -21,7 +21,12 @@ const end = () => {
     const cartasViradas = document.querySelectorAll('.acerto')
 
 if(cartasViradas.length == 10) {
-    alert('Parabens, você foi uma fera');
+
+    setTimeout(() => {
+
+        alert('Parabens, você foi uma fera');
+            
+    }, 600)
 }
 
 }
@@ -45,10 +50,10 @@ const checkCarta = () => {
 
             primeira.classList.remove('revelar');
             segunda.classList.remove('revelar');
-
+    
             primeira = '';
             segunda = '';
-
+            
         }, 600)
     }
 
