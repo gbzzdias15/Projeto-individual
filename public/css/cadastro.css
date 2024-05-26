@@ -113,7 +113,7 @@ ul.navbar li:hover {
     height: 80vh;
     width: 45%;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.99);
     border-radius: 20px;
     align-self: center;
     display: flex;

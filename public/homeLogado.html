@@ -32,8 +32,8 @@
             </div>
             <div>
 
-                <a href="#sobre">
-                    <li><b>Sobre </b></li>
+                <a href="./dashboard/dashboard.html">
+                    <li><b>Painel </b></li>
                 </a>
             </div>
 
@@ -41,8 +41,8 @@
 
             <div>
 
-                <a href="#sobreEu">
-                    <li><b>Desenvolvedor </b></li>
+                <a href="./jogoM.html">
+                    <li><b> game </b></li>
                 </a>
             </div>
 
@@ -72,10 +72,12 @@
         </ul>
 
 
+<div class="User" id="msg"></div>
 
 
         <div class="imgLogado">
-            <img src="./assets/icons8-primeiro-plano-do-grupo-selecionado-60.png" alt="">
+            <a href="./index.html"><img src="./assets/saida-de-emergencia.png" alt=""></a>
+            
         </div>
 
 
@@ -101,10 +103,10 @@
             </h2>
             </p>
 
-            <a href="./jogo.html">
+            <!-- <a href="./jogo.html">
                 <button class="bJogar">Jogar</button>
 
-            </a>
+            </a> -->
         </div>
 
 
@@ -274,3 +276,7 @@
 
 
 </html>
+<script>
+    msg.innerHTML = `Olá ${ sessionStorage.NOME_USUARIO }`
+ 
+</script>

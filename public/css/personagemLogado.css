@@ -79,12 +79,12 @@ ul.navbar li:hover {
     cursor: pointer;
 }
 
-.imgLogado{
-    padding: 25px;
+.User{
+    font-size: 20px;
     display: flex;
     align-items: center;
-    align-self: center;
-    cursor: pointer;
+    color: white;
+    margin-right: 10px
 }
 
 .personagem {

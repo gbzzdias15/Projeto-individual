@@ -88,15 +88,15 @@ ul.navbar li:hover {
     cursor: pointer;
 }
 
-.imgLogado img {
-    width: 60px; /* Ajuste conforme necessário */
-    height: auto;
-    padding: 25px;
-    cursor: pointer;
+
+.User{
+    font-size: 20px;
     display: flex;
     align-items: center;
-    margin-top: -10px;
+    color: white;
+    margin-right: 10px
 }
+
 
 
 .premiações{

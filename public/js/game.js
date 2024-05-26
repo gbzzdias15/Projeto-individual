@@ -6,6 +6,11 @@ const personagens = [
     'michel',
     'jay',
     'junior',
+    'kady',
+    'clair',
+    'michel',
+    'jay',
+    'junior',
     'kady'
 ];
 const createElement = (tag, className) => {
@@ -21,7 +26,12 @@ const end = () => {
     const cartasViradas = document.querySelectorAll('.acerto')
 
 if(cartasViradas.length == 10) {
-    alert('Parabens, você foi uma fera');
+
+    setTimeout(() => {
+
+        alert('Parabens, você foi uma fera');
+            
+    }, 600)
 }
 
 }
@@ -45,10 +55,10 @@ const checkCarta = () => {
 
             primeira.classList.remove('revelar');
             segunda.classList.remove('revelar');
-
+    
             primeira = '';
             segunda = '';
-
+            
         }, 600)
     }
 
@@ -96,9 +106,9 @@ const createCarta = (personagem) => {
 }
 
 const loadGame = () => {
-    const duplicatePersonagens = [...personagens, ...personagens];
+    // const duplicatePersonagens = [...personagens, ...personagens];
 
-    const shuffledArray = duplicatePersonagens.sort(() => Math.random() - 0.4)
+    const shuffledArray = personagens.sort(() => Math.random() - 0.4)
 
 
     shuffledArray.forEach((personagem) => {
