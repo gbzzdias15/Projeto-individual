@@ -1,0 +1,91 @@
+.header .navbar {
+    display: flex;
+    justify-content: start;
+    margin-left: 70px;
+}
+
+#mensagem_sair {
+    left: 46%
+}
+
+.container_dashboard {
+    margin-top: 81px;
+    height: 87vh;
+    display: flex;
+    align-items: center;
+    background-color: #000000;
+}
+
+.container_dashboard img {
+    height: 100%;
+    width: 18%;
+}
+
+.conteudo {
+    display: flex;
+    width: 100%;
+    gap: 30px;
+    align-items: center;
+    justify-content: start;
+}
+
+.rankings {
+    margin-top: 10px;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.rankings h2 {
+    color: #f99601;
+    font-family: 'Fjalla One', sans-serif
+
+}
+
+.ranking_normal, .ranking_dificil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.rankings table{
+    box-sizing: border-box;
+    background-color: #4d0d0d;
+    border-radius: 12px;
+    overflow: hidden;
+    border-collapse: collapse;
+    border: 8px solid #2d2c2c;
+}
+
+.rankings td, .rankings th {
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.rankings th {
+    padding: 20px;
+    color: #ffffff;
+    background-color: #4d0d0d;
+}
+
+.rankings td {
+    background-color: #919191;
+    font-weight: bolder;
+    color:#4d0d0d;
+    padding: 6px;    
+
+}
+
+
+.dashboard {
+    height: 45%;
+    width: 65%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

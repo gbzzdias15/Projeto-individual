@@ -1,5 +1,8 @@
 
 const jogo = document.querySelector('.jogo');
+const timer = document.querySelector('.timer')
+const mensagem = document.querySelector('.mensagem')
+const jogador = document.querySelector('.jogador')
 
 const personagens = [
     'clair',
@@ -25,16 +28,63 @@ let segunda = '';
 const end = () => {
     const cartasViradas = document.querySelectorAll('.acerto')
 
-if(cartasViradas.length == 10) {
+    if (cartasViradas.length == 10) {
+        clearInterval(loop)
+        setTimeout(() => {
 
-    setTimeout(() => {
+            mensagem.innerHTML = `<span style="color: green; ">Parabens Player:${jogador.innerHTML} seu tempo foi de ${timer.innerHTML} Segundos!</span>`
 
-        alert('Parabens, você foi uma fera');
-            
-    }, 600)
+        }, 600)
+
+        if (sessionStorage.VEZESJOGADAS_USUARIO == undefined) {
+            sessionStorage.VEZESJOGADAS_USUARIO = 0
+        }
+        sessionStorage.VEZESJOGADAS_USUARIO = Number(sessionStorage.VEZESJOGADAS_USUARIO) + 1
+
+        var tempo = Number(timer.innerHTML)
+        var idUsuario = sessionStorage.ID_USUARIO
+        var jogadas = sessionStorage.VEZESJOGADAS_USUARIO
+        console.log(jogadas)
+
+        fetch("/jogo/inserir", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+
+                tempoServer: tempo,
+                jogadasServer: jogadas,
+                idUsuarioServer: idUsuario,
+
+
+
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+
+                    console.log('enviando para o banco')
+
+
+
+                } else {
+                    throw "Houve um erro ao tentar enviar para o banco!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+
+            });
+
+        return false;
+    }
+
 }
 
-}
+
 
 const checkCarta = () => {
     const primeiroP = primeira.getAttribute('data-personagem')
@@ -55,10 +105,10 @@ const checkCarta = () => {
 
             primeira.classList.remove('revelar');
             segunda.classList.remove('revelar');
-    
+
             primeira = '';
             segunda = '';
-            
+
         }, 600)
     }
 
@@ -116,4 +166,17 @@ const loadGame = () => {
         jogo.appendChild(carta);
     })
 }
-loadGame();
+
+const começar = () => {
+    this.loop = setInterval(() => {
+
+        const tempo = Number(timer.innerHTML);
+        timer.innerHTML = tempo + 1
+
+    }, 1000)
+}
+
+window.onload = () => {
+    começar();
+    loadGame();
+}

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/dashboards.css">
+
+</head>
+
+<body>
+
+
+  <div class="header">
+
+
+    <div class="logo">
+      <a class="logo1" href="./homeLogado.html">
+        <img src="./assets/images-Photoroom.png-Photoroom.png" alt="">
+      </a>
+    </div>
+
+    <ul class="navbar">
+
+
+      <div>
+
+        <a href=" ./homeLogado.html ">
+          <li><b>Home </b></li>
+        </a>
+
+      </div>
+
+
+
+
+      <div class="imgVolta">
+        <a href="./homeLogado.html">
+          <img src="./assets/icons8-voltar-64.png" alt="" /></a>
+      </div>
+
+    </ul>
+
+
+
+  </div>
+  <div class="kpis">
+
+    <div class="kpi">
+      <div id="msg"></div>
+    </div>
+
+    <div class="kpi2">
+      <div id="msg2">Tempo:</div>
+    </div>
+
+
+  </div>
+  <div class="dash">
+    <canvas id="myChart"></canvas>
+
+    <div class="ranking">
+      <h2>Ranking</h2>
+      <table class="rank">
+
+
+        <tr>
+          <th>USUÁRIO</th>
+          <th>TEMPO</th>
+        </tr>
+        <tr>
+          <td class="usuario">NOME</td>
+          <td class="tempo">TEMPO</td>
+        </tr>
+        <tr>
+          <td class="usuario">NOME</td>
+          <td class="tempo">TEMPO</td>
+        </tr>
+        <tr>
+          <td class="usuario">NOME</td>
+          <td class="tempo">TEMPO</td>
+        </tr>
+        <tr>
+          <td class="usuario">NOME</td>
+          <td class="tempo">TEMPO</td>
+        </tr>
+        <tr>
+          <td class="usuario">NOME</td>
+          <td class="tempo">TEMPO</td>
+        </tr>
+
+      </table>
+
+    </div>
+  </div>
+
+
+</body>
+
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  msg.innerHTML = `Nome: ${sessionStorage.NOME_USUARIO}`
+ 
+
+  function dash() {
+    const ctx = document.getElementById('myChart');
+    if (Chart.getChart(ctx)) {
+      Chart.getChart(ctx).destroy()
+    }
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: lista_u,
+        datasets: [{
+          label: 'Game',
+          data: lista_t,
+          borderWidth: 1,
+          backgroundColor: 'rgb(255,255,0)',
+          borderColor: 'rgb(255,255,0)'
+
+        }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            labels: {
+              color: 'rgb(255, 255, 0)',
+
+              font: {
+                size: 16 // Tamanho da fonte aqui
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+  }
+
+  var lista_t = []
+  var lista_u = []
+  function buscar() {
+
+    fetch("/jogo/buscar")
+      .then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!");
+
+        if (resposta.ok) {
+          console.log(resposta);
+
+          resposta.json().then((json) => {
+            console.log(json);
+            console.log(JSON.stringify(json));
+
+            for (var i = 0; i < json.length; i++) {
+              lista_t.push(json[i].tempo)
+              lista_u.push(json[i].nome)
+            }
+
+
+            dash()
+
+          });
+        } else {
+          console.log("Houve um erro ao tentar realizar a busca!");
+
+          resposta.text().then((texto) => {
+            console.error(texto);
+
+          });
+        }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+      });
+
+
+      return false;
+  
+
+
+
+
+
+}
+
+function rank(){
+  fetch("/rank/ranquear")
+    .then(function (resposta) {
+      console.log("ESTOU NO THEN DO ranquear()!");
+
+      if (resposta.ok) {
+        console.log(resposta);
+
+        resposta.json().then((json) => {
+          console.log(json);
+          console.log(JSON.stringify(json));
+
+         var usuario = document.querySelectorAll(".usuario")
+         var tempo = document.querySelectorAll(".tempo")
+
+         console.log(usuario)
+         console.log(tempo)
+          for (var i = 0; i < usuario.length; i++) {
+           usuario[i].innerHTML= json[i].nome
+           tempo[i].innerHTML = json[i].tempo
+          }
+
+         
+
+        });
+      } else {
+        console.log("Houve um erro ao tentar realizar a busca!");
+
+        resposta.text().then((texto) => {
+          console.error(texto);
+
+        });
+      }
+    })
+    .catch(function (erro) {
+      console.log(erro);
+    });
+
+  return false;
+  }
+
+  window.onload = () => {
+    buscar(),rank()
+  }
+
+</script>

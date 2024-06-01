@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Família Soprano - Painel</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="../css/...css">
+    <link rel="stylesheet" href="./css/style_logado.css">
+    <link rel="shortcut icon" href="./assets/icon.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="img_logo">
+            <img src="./Assets/logo_sopranos.png" alt="" onclick="voltar()">
+        </div>
+        <ul class="navbar">
+            <li><a href="index_logado.html">Home</a></li>
+            <li><a href="./personagens_logado.html">Personagens</a></li>
+            <li><a href="./premiacoes_logado.html">Premiações</a></li>
+            <li><a href="./jogo_memoria.html">Jogo da memória</a></li>
+            <li><a href="" style=" color:#f90201;">Painel</a></li>
+        </ul>
+        <div class="perfil">
+            <img src="./Assets/foto_perfil.png" alt="" onclick="mudar_estado_perfil()">
+        </div>
+    </div>
+    <div class="area_perfil" id="perfil">
+        <div class="perfil_sup">
+            <span id="b_nome">Olá  NomeUsuário!</span>
+            <img src="./Assets/x.png"  id="fechar" onclick="mudar_estado_perfil()">
+        </div>
+        <div class="txt_perfil">
+            <span id="b_email">emailUsuario@.com</span>
+        </div>
+        <span onclick="voltar_deslogado()">Sair da conta</span>
+    </div>
+
+    <div id="mensagem_sair"></div>
+    <div class="container_dashboard">
+        <img src="./Assets/christopher_dashboard.jpg" alt="">
+        <div class="conteudo">
+            <div class="rankings">
+                <div class="ranking_normal">
+                    <h2>Ranking</h2>
+                    <table class="tabela_normal">
+                        <tr>
+                            <th>USUÁRIO</th>
+                            <th>TEMPO</th>
+                        </tr>
+                        <tr>
+                            <td class="usuario_normal">TESTE2_NOME</td>
+                            <td class="tempo_normal">TESTE2_TEMPO</td>
+                        </tr>
+                        <tr>
+                            <td class="usuario_normal">TESTE2_NOME</td>
+                            <td class="tempo_normal">TESTE2_TEMPO</td>
+                        </tr>
+                        <tr>
+                            <td class="usuario_normal">TESTE2_NOME</td>
+                            <td class="tempo_normal">TESTE2_TEMPO</td>
+                        </tr>
+                        <tr>
+                            <td class="usuario_normal">TESTE2_NOME</td>
+                            <td class="tempo_normal">TESTE2_TEMPO</td>
+                        </tr>
+                        <tr>
+                            <td class="usuario_normal">TESTE2_NOME</td>
+                            <td class="tempo_normal">TESTE2_TEMPO</td>
+                        </tr>
+                    </table>
+                </div>
+    
+                <div class="ranking_dificil">
+                    <h2>Ranking(Dificil)</h2>
+                    <table class="tabela_dificil">
+                        <tr>
+                            <th>USUÁRIO</th>
+                            <th>TEMPO</th>
+                        </tr>
+                        <tr>
+                            <td class="usuario_dificil">TESTE2_NOME</td>
+                            <td class="tempo_dificil">TESTE2_TEMPO</td>
+                        </tr>
+                        <tr>
+                            <td class="usuario_dificil">TESTE2_NOME</td>
+                            <td class="tempo_dificil">TESTE2_TEMPO</td>
+                        </tr>
+                        <tr>
+                            <td class="usuario_dificil">TESTE2_NOME</td>
+                            <td class="tempo_dificil">TESTE2_TEMPO</td>
+                        </tr>
+                        <tr>
+                            <td class="usuario_dificil">TESTE2_NOME</td>
+                            <td class="tempo_dificil">TESTE2_TEMPO</td>
+                        </tr>
+                        <tr>
+                            <td class="usuario_dificil">TESTE2_NOME</td>
+                            <td class="tempo_dificil">TESTE2_TEMPO</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="dashboard">
+                <canvas id="myChart2"></canvas>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+<script>
+    b_nome.innerHTML = `Olá ${sessionStorage.NOME_USUARIO}`;
+    b_email.innerHTML = `Email: ${sessionStorage.EMAIL_USUARIO}`;
+
+    function voltar() {
+        document.location.href = './index_logado.html'
+    }
+
+    function mudar_estado_perfil() {
+        var display = document.getElementById('perfil').style.display;
+
+        if(display == 'none' || display == '') {
+            document.getElementById('perfil').style.display = 'flex'
+        } else {
+            document.getElementById('perfil').style.display = 'none'
+        }
+    }
+
+    function fechar_perfil() {
+        document.getElementById('perfil').style.display = 'none';
+    }
+
+    function voltar_deslogado() {
+       
+        sessionStorage.EMAIL_USUARIO = '';
+        sessionStorage.NOME_USUARIO = '';
+        sessionStorage.ID_USUARIO = '';
+
+
+        setTimeout(function () {
+        window.location = "./index.html";
+        }, 3000); // apenas para exibir o loading
+
+    }
+</script>
+
+<script>
+    window.onload = () => {
+        puxarDados();
+    }
+    
+    usuarios_grafico = [];
+    media_tempo_grafico = [];
+    
+    function puxarDados() {
+        fetch("/jogo/buscar").then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+            
+            if (resposta.ok) {
+                console.log(resposta);
+
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    console.log(json.length)
+                    for(var i = 0; i <  json.length; i++) {
+                        usuarios_grafico.push(json[i].nome)
+                        media_tempo_grafico.push(json[i].media)
+                    }
+                    criarGraficos();
+                });
+
+            } else {
+                console.log("Houve um erro ao puxar os dados!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        fetch("/ranking/ranquear").then(function (resposta) {
+            console.log("ESTOU NO THEN DO ranquear()!")
+            
+            if (resposta.ok) {
+                console.log(resposta);
+                
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    console.log(json.length)
+                    console.log(json[0].modo)
+                    console.log(json[0].tempo)
+                    console.log(json[0].nome)
+
+                    var usuario_normal = document.querySelectorAll('.usuario_normal');
+                    var usuario_dificil = document.querySelectorAll('.usuario_dificil');
+
+                    var tempo_normal = document.querySelectorAll('.tempo_normal');
+                    var tempo_dificil = document.querySelectorAll('.tempo_dificil');
+                    console.log(usuario_normal)
+                    console.log(tempo_normal)
+                    console.log(usuario_dificil)
+                    console.log(tempo_dificil)
+
+                    var i_normal = 0;
+                    var i_dificil = 0;
+                    for(var i = 0; i < json.length; i++) {
+
+                        console.log(json[i].modo)
+                        if(json[i].modo == 'normal' && i_normal < usuario_normal.length) {
+
+                            // for(var i_normal = 0; i_normal < 5; i_normal++) {
+                                usuario_normal[i_normal].innerHTML = json[i].nome
+                                tempo_normal[i_normal].innerHTML = `${json[i].tempo}s`
+                            // }
+                            i_normal++;
+
+                        } else if (json[i].modo == 'dificil' && i_dificil < usuario_dificil.length){
+                            
+                            // for(var i_dificil = 0; i_dificil < 5; i_dificil++) {
+                                usuario_dificil[i_dificil].innerHTML = json[i].nome
+                                tempo_dificil[i_dificil].innerHTML = `${json[i].tempo}s`
+                            // }
+                            i_dificil++;
+                        }
+                    }
+                });
+
+                // criarGraficos();
+            } else {
+                console.log("Houve um erro ao puxar os dados!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    const criarGraficos = () => {
+        // puxarDados();
+
+        const ctx = document.getElementById('myChart2');
+
+        if(Chart.getChart(ctx)) {
+            Chart.getChart(ctx).destroy()
+        }
+
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            // labels: usuarios_grafico,
+            labels: usuarios_grafico,
+            datasets: [{
+              label: 'Usuário logado',
+            //   data: media_tempo_grafico,
+              data: media_tempo_grafico,
+              borderWidth: 1,
+              backgroundColor:'rgb(249, 2, 1)'
+            }]
+          },
+          options: {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ffffff'
+                    } 
+                },
+                title: {
+                    display: true,
+                    text: 'Média de tempo por usuário',
+                    color: '#f99601',
+                    font: {
+                        size: 30,
+                        family: "'Fjalla One', sans-serif"
+                    }
+                }
+            },
+            scales: {
+              y: {
+                  beginAtZero: true,
+                grid : {
+                    color: 'rgb(77, 13, 13, 0.8)'
+                },
+                ticks: {
+                    color: '#ffffff'
+                },
+                title: {
+                    display: true,
+                    text: 'segundos',
+                    color: '#f99601'
+                }
+              },
+              x: {
+                ticks: {
+                    color: '#ffffff'
+                }
+              }
+            }
+        }
+        });
+    }
+  </script>
+  

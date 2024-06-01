@@ -20,14 +20,18 @@ function autenticar(req, res) {
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
 
+ if(resultadoAutenticar[0].vezesJogadas == null){
+    resultadoAutenticar[0].vezesJogadas =0
+ }
+ console.log( resultadoAutenticar[0].vezesJogadas)
 
-
-                                            res.json({
-                                                id: resultadoAutenticar[0].id,
+                                            res.status(200).json({
+                                                id: resultadoAutenticar[0].idUsuario,
                                                 email: resultadoAutenticar[0].email,
                                                 nome: resultadoAutenticar[0].nome,
                                                 senha: resultadoAutenticar[0].senha,
-                                            
+                                             vezesJogadas : resultadoAutenticar[0].vezesJogadas
+
                                             });
 
                             } else if (resultadoAutenticar.length == 0) {

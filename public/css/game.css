@@ -4,10 +4,29 @@ body {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     background: rgb(0, 0, 0);
     background: linear-gradient(90deg, rgba(0, 0, 0, 1) 31%, rgba(229, 214, 43, 1) 90%, rgba(235, 220, 44, 1) 100%);
-    
+    cursor: pointer;
     
    
 }
+
+::-webkit-scrollbar {
+    width: 12px; /* Largura da barra de rolagem */
+  }
+  
+  /* Cor do fundo da barra de rolagem */
+  ::-webkit-scrollbar-track {
+    background: black; 
+  }
+  
+  /* Cor da barra de rolagem */
+  ::-webkit-scrollbar-thumb {
+    background: yellow; 
+  }
+  
+  /* Cor da barra de rolagem ao passar o mouse */
+  ::-webkit-scrollbar-thumb:hover {
+    background: transparent; 
+  }
 
 
 .header .logo {
@@ -41,7 +60,39 @@ body {
     height: auto; /* Mantém a proporção da altura automaticamente */
 }
 
+main{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 20px 50px;
+    margin-top:  -150px;
+}
 
+.oi{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgba(255, 255, 0, 0.7);
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+font-size: 20px;
+    width: 80%;
+    margin-top: -200px;
+    padding: 30px;
+    margin: 0 0 20px ;
+    color: black;
+    
+}
+
+.jogador{
+    display: flex;
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-right: 10%;
+ 
+}
 
 .header {
     display: flex;
@@ -120,13 +171,15 @@ ul.navbar li:hover {
 .jogo {
     display: grid;
     grid-template-columns:repeat(5, 130px);
-    width: 70%;
+    width: 90%;
     gap: 15px;
     margin: 3% auto;
     border: 2px solid white;
     padding: 50px;
     background-color: rgba(0, 0, 0, 0.9);
     height: 100%;
+    
+    align-items: center;
     
 }
 
@@ -138,7 +191,7 @@ ul.navbar li:hover {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 20px;
     text-align: justify;
-    margin-top: -3%;
+    margin-top: -90px;
     padding: 50px;
     border-radius: 20px;
     width: 80%;

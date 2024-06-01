@@ -40,59 +40,17 @@
 
     <div class="jogoM">
 
-
-        <div class="jogo">
-
-
-            <!-- <div class="carta">
-                <div class="parte frente">
-    
+        <main>
+            <header class="oi">
+       <span class="jogador" id="msg"></span>
+            <span>Tempo : <span class="timer">00</span></span>
+        </header>
+        <div class="mensagem" id="msg2"></div>
+                <div class="jogo">
+        
+        
                 </div>
-    
-                <div class="parte tras">
-    
-                </div>
-            </div> -->
-
-            <!-- <div class="carta">
-    
-            </div>
-    
-            <div class="carta">
-    
-            </div>
-    
-            <div class="carta">
-    
-            </div>
-    
-            <div class="carta">
-    
-            </div>
-    
-            <div class="carta">
-    
-            </div>
-    
-            <div class="carta">
-    
-            </div>
-    
-            <div class="carta">
-    
-            </div>
-    
-            <div class="carta">
-    
-            </div>
-    
-            <div class="carta">
-    
-            </div> -->
-
-
-
-        </div>
+        </main>
 
         <div class="txtInfo">
             <h4>Saiba como jogar</h4>
@@ -110,3 +68,6 @@
 </body>
 
 </html>
+<script>
+    msg.innerHTML =` ${ sessionStorage.NOME_USUARIO }`
+</script>

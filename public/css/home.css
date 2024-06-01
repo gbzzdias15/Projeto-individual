@@ -12,6 +12,25 @@ html {
     scroll-behavior: smooth;
 }
 
+::-webkit-scrollbar {
+    width: 12px; /* Largura da barra de rolagem */
+  }
+  
+  /* Cor do fundo da barra de rolagem */
+  ::-webkit-scrollbar-track {
+    background: black; 
+  }
+  
+  /* Cor da barra de rolagem */
+  ::-webkit-scrollbar-thumb {
+    background: yellow; 
+  }
+  
+  /* Cor da barra de rolagem ao passar o mouse */
+  ::-webkit-scrollbar-thumb:hover {
+    background: transparent; 
+  }
+
 
 .header .logo {
     width: 200px;
