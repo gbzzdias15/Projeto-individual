@@ -4,6 +4,7 @@ body {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     background: rgb(0, 0, 0);
     background: linear-gradient(90deg, rgba(0, 0, 0, 1) 31%, rgba(229, 214, 43, 1) 90%, rgba(235, 220, 44, 1) 100%);
+<<<<<<< HEAD
     cursor: pointer;
     
    
@@ -27,6 +28,12 @@ body {
   ::-webkit-scrollbar-thumb:hover {
     background: transparent; 
   }
+=======
+    
+    
+   
+}
+>>>>>>> bb77e24e9e0ff8554e38e5ed3cf85879eae5aa31
 
 
 .header .logo {
@@ -60,6 +67,7 @@ body {
     height: auto; /* Mantém a proporção da altura automaticamente */
 }
 
+<<<<<<< HEAD
 main{
     display: flex;
     flex-direction: column;
@@ -93,6 +101,9 @@ font-size: 20px;
     margin-right: 10%;
  
 }
+=======
+
+>>>>>>> bb77e24e9e0ff8554e38e5ed3cf85879eae5aa31
 
 .header {
     display: flex;
@@ -170,6 +181,7 @@ ul.navbar li:hover {
 
 .jogo {
     display: grid;
+<<<<<<< HEAD
     grid-template-columns:repeat(5, 130px);
     width: 90%;
     gap: 15px;
@@ -181,6 +193,16 @@ ul.navbar li:hover {
     
     align-items: center;
     
+=======
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    width: 70%;
+    gap: 15px;
+    margin: 3% auto;
+    border: 2px solid white;
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.9);
+    height: 100%;
+>>>>>>> bb77e24e9e0ff8554e38e5ed3cf85879eae5aa31
 }
 
 
@@ -189,12 +211,21 @@ ul.navbar li:hover {
     flex-direction: column;
     color: white;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+<<<<<<< HEAD
     font-size: 20px;
     text-align: justify;
     margin-top: -90px;
     padding: 50px;
     border-radius: 20px;
     width: 80%;
+=======
+    font-size: 30px;
+    text-align: justify;
+    margin-top: -3%;
+    padding: 50px;
+    border-radius: 20px;
+    width: 70%;
+>>>>>>> bb77e24e9e0ff8554e38e5ed3cf85879eae5aa31
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
     border-bottom: 5px solid white;

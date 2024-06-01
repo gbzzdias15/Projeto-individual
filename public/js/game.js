@@ -28,6 +28,7 @@ let segunda = '';
 const end = () => {
     const cartasViradas = document.querySelectorAll('.acerto')
 
+<<<<<<< HEAD
     if (cartasViradas.length == 10) {
         clearInterval(loop)
         setTimeout(() => {
@@ -81,6 +82,16 @@ const end = () => {
 
         return false;
     }
+=======
+if(cartasViradas.length == 10) {
+
+    setTimeout(() => {
+
+        alert('Parabens, você foi uma fera');
+            
+    }, 600)
+}
+>>>>>>> bb77e24e9e0ff8554e38e5ed3cf85879eae5aa31
 
 }
 
@@ -105,10 +116,10 @@ const checkCarta = () => {
 
             primeira.classList.remove('revelar');
             segunda.classList.remove('revelar');
-
+    
             primeira = '';
             segunda = '';
-
+            
         }, 600)
     }
 
