@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/simulador.css">
+
+</head>
+
+<body>
+
+
+    <div class="header">
+
+
+        <div class="logo">
+            <a class="logo1" href="./homeLogado.html">
+                <img src="./assets/My_Wife_and_Kids_logo.png" alt="">
+            </a>
+        </div>
+
+        <ul class="navbar">
+
+
+            <div>
+
+                <a href=" ./homeLogado.html ">
+                    <li><b>Home </b></li>
+                </a>
+
+            </div>
+
+
+
+
+
+        </ul>
+        <div class="imgVolta">
+            <a href="./homeLogado.html">
+                <img src="./assets/icons8-voltar-64.png" alt="" /></a>
+        </div>
+
+
+    </div>
+    <div class="simulador">
+
+        <div class="simuleMsg">
+            <h3>Simule seus episodios</h3>
+        </div>
+
+     episodio que quer assirtir: <input type="text" id="ipt_ep"><br>
+        quantidade de tempo disponível : <input type="number" id="ipt_tempo"><br>
+        Unidade de tempo <select id="slcTempo">
+            <option value="#">Selecione uma opção</option>
+            <option value="hrs">Horas</option>
+            <option value="min">Minutos</option>
+        </select><br>
+
+        Deseja pular abertura ? <select id="slcAbertura">
+            <option value="#">Selecione uma opção</option>
+            <option value="ss">sim</option>
+            <option value="nn">não</option>
+        </select><br>
+
+        Deseja pular encerramento ?<select id="slcEncerramento">
+            <option value="#">Selecione uma opção</option>
+            <option value="si">sim</option>
+            <option value="na">não</option>
+        </select><br>
+
+        Selecione a sua temporada: <select id="slcTemp">
+            <option value="#">Selecione uma opção</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select><br>
+
+        <button onclick="assistir()">Assistir episódios</button>
+        <div class="msg" id="msg"></div>
+    </div>
+</body>
+
+</html>
+<script>
+    function assistir() {
+        var ep = Number(ipt_ep.value)
+        var tempo = Number(ipt_tempo.value)
+        var tmp = slcTempo.value
+        var abertura = slcAbertura.value
+        var encerramento = slcEncerramento.value
+        var temp = slcTemp.value
+        var epmin = 0
+        var epstatu = ''
+        var epsvistos = 0
+        msg.innerHTML = ''
+        var tempovisto = 0
+
+        if (ep < 1 || ep > 25) {
+            alert("O número do episódio é inválido")
+        } else {
+
+            if (tmp == 'hrs') {
+                tempo = tempo * 60
+            }
+
+
+            if (abertura == 'ss' && encerramento == 'si') {
+                epmin = 20
+            } else if (abertura == 'ss' || encerramento == 'si') {
+                epmin = 22
+            } else {
+                epmin = 24
+            }
+
+            epsvistos = tempo / epmin
+            msg.innerHTML += `<h2>Bem vindo a eu a patroa e as crianças!</h2>`
+            for (var cont = 1; cont <= tempo; cont++) {
+                 msg.innerHTML += ` <br>Epísodio :${ep} da ${temp}° Temporada! <br>`
+                
+
+
+
+                if (epmin > tempo) {
+                    epmin = tempo
+                }
+                for (var contagem = 1; contagem <= epmin; contagem++) {
+
+                    epstatu
+
+                    if (abertura == 'nn' && contagem <= 2) {
+                        epstatu = `   Assistindo abertura `
+                        tempo--
+                    } else if (abertura == 'nn' && encerramento == 'na' && contagem > 22 && contagem <= 24) {
+                        epstatu = `   Assistindo encerramento  `
+                        tempo--
+                    } else if (abertura == 'ss' && encerramento == 'na' && contagem > 20 && contagem <= 22) {
+                        epstatu = `   Assistindo encerramento  `
+                        tempo--
+                    } else {
+                        epstatu = `   Assistindo o episódio `
+                        tempo--
+                    }
+
+                    msg.innerHTML += `  Minuto ${contagem} : ${epstatu} <br> `
+                }
+
+                }
+            msg.innerHTML = ` <br>Fim da simulação  <br> com esse tempo você consegue ver: ${epsvistos} episódios a partir do ${ep} da ${temp}° temporada`
+
+
+
+        }
+
+    }
+
+    
+
+</script>
